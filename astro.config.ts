@@ -56,6 +56,21 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      include: ['three'], // 预构建 three
+    },
+    build: {
+      rollupOptions: {
+        output: {
+          manualChunks(id) {
+            // 如果模块来自 three，单独打包成 three chunk
+            if (id.includes('node_modules/three')) {
+              return 'three';
+            }
+          },
+        },
+      },
+    },
   },
   fonts: [
     {
