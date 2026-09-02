@@ -29,6 +29,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.SERVER_HOST }}
           REMOTE_USER: ${{ secrets.SERVER_USER }}
           SOURCE: "dist/"
-          TARGET: "/home/ubuntu/Cloverstia-frontend"
+          TARGET: "/home/ubuntu/Cloverstia-frontend/dist"
           EXCLUDE: "/.git, /node_modules"
           ARGS: "-rlgoDzvc -i --delete"
