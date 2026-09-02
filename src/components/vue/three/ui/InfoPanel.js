@@ -1,17 +1,25 @@
 // InfoPanel.js —— 全局信息展示部件（DOM 覆盖层）
 // 点击场景中的物体时，把该物体的 getInfo() 结果展示在这里
 // 风格与 3D 场景一致：白底 + 黑色描边 + 硬偏移阴影（正交感）
+// 面板以高 z-index 浮于 3D canvas 之上，并高优先级拦截指针/滚轮事件阻止冒泡到 window，
+// 从而避免点击面板时误触发 SceneManager 在 window 上的交互监听器。
+
+// 需要拦截的事件类型：
+//   pointermove / pointerup / pointercancel / wheel —— SceneManager 监听在 window 上（冒泡阶段）
+//   pointerdown —— 监听在 canvas 上；面板与 canvas 为兄弟节点，点击面板时 canvas 不会收到事件，
+//                  但仍统一拦截冒泡，确保 window 上的任何后续监听器都不触发。
+const STOP_EVENTS = ['pointerdown', 'pointermove', 'pointerup', 'pointercancel', 'wheel'];
 
 export class InfoPanel {
     constructor() {
-        // 根容器：固定定位、不拦截鼠标事件
+        // 根容器：固定定位、高 z-index、开启指针事件捕获（不再穿透到下方 canvas）
         this._el = document.createElement('div');
         this._el.style.cssText = [
             'position: fixed',
             'top: 16px',
             'left: 16px',
-            'z-index: 10',
-            'pointer-events: none',
+            'z-index: 1000',
+            'pointer-events: auto',
             'background: #ffffff',
             'border: 1px solid #000',
             'padding: 14px 16px 10px',
@@ -42,6 +50,21 @@ export class InfoPanel {
 
         this._el.append(this._titleEl, this._descEl, this._propsEl, this._linkEl);
         document.body.appendChild(this._el);
+
+        // 高优先级拦截：在面板根节点拦截指针/滚轮事件，阻止其冒泡到 window，
+        // 避免 SceneManager 在 window 上的 pointermove/pointerup/pointercancel/wheel 监听器触发。
+        // 使用冒泡阶段（默认）：先让面板内的目标（如链接）接收事件完成自身交互（如导航），
+        // 再阻止事件继续上传到 window。
+        this._onStopEvent = (e) => {
+            // wheel 还需阻止默认行为，避免页面滚动/缩放干扰
+            if (e.type === 'wheel') {
+                e.preventDefault();
+            }
+            e.stopPropagation();
+        };
+        for (const type of STOP_EVENTS) {
+            this._el.addEventListener(type, this._onStopEvent);
+        }
     }
 
     /**
@@ -92,8 +115,11 @@ export class InfoPanel {
         this._el.style.display = 'none';
     }
 
-    /** 资源清理：从 DOM 中移除 */
+    /** 资源清理：移除事件监听并从 DOM 中移除 */
     dispose() {
+        for (const type of STOP_EVENTS) {
+            this._el.removeEventListener(type, this._onStopEvent);
+        }
         this._el.remove();
     }
 }
