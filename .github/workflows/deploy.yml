@@ -8,6 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
+    
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -31,3 +32,4 @@ jobs:
           source: "./dist/*"
           target: "/home/ubuntu/Cloverstia-frontend/dist"  # 你的服务器 Nginx 目录
           strip_components: 1
+          debug: true
