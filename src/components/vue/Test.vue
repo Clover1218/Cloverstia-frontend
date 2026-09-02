@@ -1,3 +1,7 @@
 <template>
-  <div style="color: red; position: fixed; z-index: 9999;">Vue 组件加载成功</div>
+  <button @click="count++">count: {{ count }}</button>
 </template>
+<script setup>
+import { ref } from 'vue';
+const count = ref(0);
+</script>
