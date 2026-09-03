@@ -29,7 +29,7 @@ export default {
     page: "Page",
   },
   home: {
-    socialLinks: "Social Links",
+    socialLinks: "社交链接",
     featured: "Featured",
     recentPosts: "Recent Posts",
     allPosts: "All Posts",
