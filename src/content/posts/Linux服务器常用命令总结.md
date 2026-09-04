@@ -1,13 +1,13 @@
 ---
 author: Clover
-pubDatetime: 2026-09-02T15:22:00Z
-modDatetime: 2026-06-03T00:00:00.000Z
+pubDatetime: 2026-09-02T15:00:00+08:00
+modDatetime: 2026-09-02T15:00:00+08:00
 title: Linux服务器常用命令总结
+slug: the-usual-command-in-Linux 
 featured: true
 draft: false
 tags:
   - Linux
-canonicalURL: https://smale.codes/posts/setting-dates-via-git-hooks/
 description: The usual command in Linux 
 ---
 
