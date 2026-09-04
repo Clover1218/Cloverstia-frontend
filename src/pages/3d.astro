@@ -1,0 +1,24 @@
+---
+import HeroScene from '@/components/vue/HeroScene.vue';
+---
+
+<HeroScene client:only="vue" />
+
+<style is:inline>
+  /* 全局样式：HeroScene 使用 client:only="vue" 时,其 scoped CSS 不会被 Astro
+     构建系统提取(SSR 被跳过导致 CSS 丢失),因此在此处用 is:inline 强制内联,
+     确保 .hero-scene 容器在构建产物中仍能获得尺寸。 */
+  .hero-scene {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 100;
+  }
+</style>

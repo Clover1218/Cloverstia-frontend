@@ -10,14 +10,8 @@
 /* ... 其他字重同理 */
 
 /* 中文字体：覆盖中文字符 */
-@font-face {
-  font-family: 'PingFang';
-  src: url('/public/fonts/苹方黑体-细-简.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-  unicode-range: U+4E00-9FFF; /* 只覆盖中文 */
-}
+
+
 
 
 @theme inline {

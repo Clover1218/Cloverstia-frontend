@@ -73,81 +73,81 @@ export default defineConfig({
     },
   },
   fonts: [
-    {
-      name: "Recursive",          // 字体名称（自定义）
-      cssVariable: "--font-recursive", // CSS 变量名
-      provider: fontProviders.local(), // 改为 local 提供商
-      fallbacks: ["monospace"],
-      options: {
-        variants: [
-          {
-            weight: 300,
-            style: "normal",
-            src: [{ url: "./public/fonts/RecursiveSansCslSt-Light.ttf" }], 
-            unicodeRange: ["U+0000-00FF"],
-          },
-          {
-            weight: 400,
-            style: "normal",
-            src: [{ url: "./public/fonts/RecursiveSansCslSt-Med.ttf" }], 
-            unicodeRange: ["U+0000-00FF"],
-          },
-          {
-            weight: 500,
-            style: "normal",
-            src: [{ url: "./public/fonts/RecursiveSansCslSt-Regular.ttf" }], 
-            unicodeRange: ["U+0000-00FF"],
-          },
-          {
-            weight: 600,
-            style: "normal",
-            src: [{ url: "./public/fonts/RecursiveSansCslSt-SemiBd.ttf" }], 
-            unicodeRange: ["U+0000-00FF"],
-          },          
-          {
-            weight: 700,
-            style: "normal",
-            src: [{ url: "./public/fonts/RecursiveSansCslSt-XBlk.ttf" }], 
-            unicodeRange: ["U+0000-00FF"],
-          },
-        ],
-      },
-    },
-    {
-      name: "PingFang",          // 字体名称（自定义）
-      cssVariable: "--font-pingfang", // CSS 变量名
-      provider: fontProviders.local(), // 改为 local 提供商
-      fallbacks: ["monospace"],
-      options: {
-        variants: [
-          {
-            weight: 300,
-            style: "normal",
-            src: [{ url: "./public/fonts/苹方黑体-极细-简.ttf" }], 
-          },
-          {
-            weight: 400,
-            style: "normal",
-            src: [{ url: "./public/fonts/苹方黑体-细-简.ttf" }], 
-          },
-          {
-            weight: 500,
-            style: "normal",
-            src: [{ url: "./public/fonts/苹方黑体-纤细-简.ttf" }], 
-          },
-          {
-            weight: 600,
-            style: "normal",
-            src: [{ url: "./public/fonts/苹方黑体-准-简.ttf" }], 
-          },          
-          {
-            weight: 700,
-            style: "normal",
-            src: [{ url: "./public/fonts/苹方黑体-中黑-简.ttf" }], 
-          },
-        ],
-      },
-    },
+    // {
+    //   name: "Recursive",          // 字体名称（自定义）
+    //   cssVariable: "--font-recursive", // CSS 变量名
+    //   provider: fontProviders.local(), // 改为 local 提供商
+    //   fallbacks: ["monospace"],
+    //   options: {
+    //     variants: [
+    //       {
+    //         weight: 300,
+    //         style: "normal",
+    //         src: [{ url: "./public/fonts/RecursiveSansCslSt-Light.ttf" }], 
+    //         unicodeRange: ["U+0000-00FF"],
+    //       },
+    //       {
+    //         weight: 400,
+    //         style: "normal",
+    //         src: [{ url: "./public/fonts/RecursiveSansCslSt-Med.ttf" }], 
+    //         unicodeRange: ["U+0000-00FF"],
+    //       },
+    //       {
+    //         weight: 500,
+    //         style: "normal",
+    //         src: [{ url: "./public/fonts/RecursiveSansCslSt-Regular.ttf" }], 
+    //         unicodeRange: ["U+0000-00FF"],
+    //       },
+    //       {
+    //         weight: 600,
+    //         style: "normal",
+    //         src: [{ url: "./public/fonts/RecursiveSansCslSt-SemiBd.ttf" }], 
+    //         unicodeRange: ["U+0000-00FF"],
+    //       },          
+    //       {
+    //         weight: 700,
+    //         style: "normal",
+    //         src: [{ url: "./public/fonts/RecursiveSansCslSt-XBlk.ttf" }], 
+    //         unicodeRange: ["U+0000-00FF"],
+    //       },
+    //     ],
+    //   },
+    // },
+    // {
+    //   name: "PingFang",          // 字体名称（自定义）
+    //   cssVariable: "--font-pingfang", // CSS 变量名
+    //   provider: fontProviders.local(), // 改为 local 提供商
+    //   fallbacks: ["monospace"],
+    //   options: {
+    //     variants: [
+    //       {
+    //         weight: 300,
+    //         style: "normal",
+    //         src: [{ url: "./public/fonts/苹方黑体-极细-简.ttf" }], 
+    //       },
+    //       {
+    //         weight: 400,
+    //         style: "normal",
+    //         src: [{ url: "./public/fonts/苹方黑体-细-简.ttf" }], 
+    //       },
+    //       {
+    //         weight: 500,
+    //         style: "normal",
+    //         src: [{ url: "./public/fonts/苹方黑体-纤细-简.ttf" }], 
+    //       },
+    //       {
+    //         weight: 600,
+    //         style: "normal",
+    //         src: [{ url: "./public/fonts/苹方黑体-准-简.ttf" }], 
+    //       },          
+    //       {
+    //         weight: 700,
+    //         style: "normal",
+    //         src: [{ url: "./public/fonts/苹方黑体-中黑-简.ttf" }], 
+    //       },
+    //     ],
+    //   },
+    // },
     // {
     //   name: "Google Sans Code",
     //   cssVariable: "--font-google-sans-code",
