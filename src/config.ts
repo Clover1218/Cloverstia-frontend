@@ -17,9 +17,13 @@ const config: ResolvedAstroPaperConfig = {
     lang: userConfig.site.lang ?? "en",
     timezone: userConfig.site.timezone ?? "UTC",
     dir: userConfig.site.dir ?? "ltr",
+
     googleVerification:
       userConfig.site.googleVerification || PUBLIC_GOOGLE_SITE_VERIFICATION,
-  },
+    icpRecord: "",
+    policeRecord: "",
+    policeRecordUrl: "",
+  },  
   posts: {
     perPage: userConfig.posts?.perPage ?? 4,
     perIndex: userConfig.posts?.perIndex ?? 4,

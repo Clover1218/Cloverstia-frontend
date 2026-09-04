@@ -19,6 +19,12 @@ interface SiteConfig {
   dir?: "ltr" | "rtl" | "auto";
   /** Google Search Console verification meta tag value */
   googleVerification?: string;
+
+  icpRecord?: string;
+  
+  policeRecord?: string; 
+  
+  policeRecordUrl?: string;
 }
 
 interface PostsConfig {
@@ -113,6 +119,9 @@ type ResolvedSiteConfig = Required<
     | "timezone"
     | "dir"
     | "ogImage"
+    | "icpRecord"
+    | "policeRecord"
+    | "policeRecordUrl"
   >
 > &
   Pick<SiteConfig, "profile" | "googleVerification">;

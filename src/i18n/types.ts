@@ -35,6 +35,8 @@ export interface UIStrings {
   footer: {
     copyright: string;
     allRightsReserved: string;
+    icpRecord: string;
+    policeRecord: string;
   };
   pages: {
     tagTitle: string;

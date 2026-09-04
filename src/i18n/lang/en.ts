@@ -37,6 +37,8 @@ export default {
   footer: {
     copyright: "Copyright",
     allRightsReserved: "All rights reserved.",
+    icpRecord: "闽ICP备XXXXXXXX号-1",
+    policeRecord: "闽公网安备XXXXXXXXXXXX号",
   },
   pages: {
     tagTitle: "Tag",

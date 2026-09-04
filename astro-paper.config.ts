@@ -11,6 +11,7 @@ export default defineAstroPaperConfig({
     lang: "en",
     timezone: "Asia/Bangkok",
     dir: "ltr",
+    
   },
   posts: {
     perPage: 4,

@@ -1,37 +1,59 @@
 ---
-title: "About"
-description: "A bit about me and this blog."
+
+title: "关于"
+
+description: "涉及Cloverstia，以及这里的一切。"
+
 ---
 
-AstroPaper is a minimal, accessible and SEO-friendly blog theme built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+## About Cloverstia
 
-![Astro Paper](@/assets/images/astropaper-og.jpg)
+Cloverstia 是我的个人网站，这个名字由 **Clover** 和 **Celestia** 组合而来。
 
-AstroPaper provides a solid foundation for blogs, or even portfolios\_ with full markdown support, built-in dark mode, and a clean layout that works out-of-the-box.
+前者代表三叶草，后者则带有天空、星辰与宇宙的意象。它们组合在一起，最终成为了 **Cloverstia** —— 一个属于我自己的名字。
 
-The blog posts in this theme also serve as guides, docs or example articles\_ making AstroPaper a flexible starting point for your next content-driven site.
+我希望这里不仅仅是一个博客。
 
-## Features
+它可以记录一些技术学习中的思考，也可以存放正在进行的项目；可以写下一段偶然产生的想法，也可以成为某个实验诞生的地方。
 
-AstroPaper comes with a set of useful features that make content publishing easy and effective:
+所以，你可能会在这里看到：
 
-- SEO-friendly
-- Fast performance
-- Light & dark mode
-- Highly customizable
-- Organizable blog posts
-- Responsive & accessible
-- Static search with [PageFind](https://pagefind.app/)
-- Automatic social image generation
+* 技术文章与学习记录
+* 个人项目与开发日志
+* 一些实验性的作品
+* 偶尔出现的随笔与想法
+* 以及一些暂时还无法被归类的东西
 
-and so much more.
+## 关于我
 
-## Show your support
+我是 Clover，一名计算机专业的学生。
 
-If you like [AstroPaper](https://github.com/satnaing/astro-paper), consider giving it a star ⭐️.
+目前仍然处于不断学习和探索的阶段，接触过 C++、Go、Python，也尝试过一些 Web、实时通信、AI 和个人项目相关的东西。
 
-Found a bug 🐛 or have an improvement ✨ in mind? Feel free to open an [issue](https://github.com/satnaing/astro-paper/issues), submit a [pull request](https://github.com/satnaing/astro-paper/pulls) or start a [discussion](https://github.com/satnaing/astro-paper/discussions).
+相比于单纯学习某一门技术，我更喜欢把想法真正做出来。
 
-If you find this theme helpful, you can also [sponsor me on GitHub](https://github.com/sponsors/satnaing) or [buy me a coffee](https://buymeacoffee.com/satnaing) to show your support — every penny counts.
+有些项目可能并不成熟，有些尝试最后也可能不了了之，但我仍然希望把这些过程记录下来。
 
-Kyay zuu! 🙏🏼
+因为很多时候，真正有趣的东西并不是最终完成的作品，而是从「我想试试看」开始，到不断踩坑、修改、重构，最后终于让它运行起来的整个过程。
+
+## 这个网站
+
+Cloverstia 目前仍然在持续建设中。
+
+这里的内容、功能和设计都可能随时发生变化。也许某一天会多出一个新的项目，也许会出现一些奇怪的小工具，或者干脆推翻现在的设计重新开始。
+
+我不太希望把它定义得太死。
+
+与其说这是一个博客，不如说它更像是一个属于我的数字花园。
+
+一些东西会在这里被种下。
+
+有些会慢慢生长，有些可能只留下短暂的痕迹。
+
+而 Cloverstia，会继续存在于这个过程中。
+
+---
+
+> Thanks for stopping by.
+>
+> 希望你能在这里发现一些有趣的东西。

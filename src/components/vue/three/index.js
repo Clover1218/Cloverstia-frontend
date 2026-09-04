@@ -166,7 +166,7 @@ export class SceneManager {
             screenHeight: 0.9,
             thickness: 0.08,
         });
-        this.objects.myLaptop.position.set(-0.5, 2.25, 0.5);
+        this.objects.myLaptop.position.set(-3, 2.25, 0.5);
         this.objects.myLaptop.rotation.y = Math.PI / 2;
         world.add(this.objects.myLaptop);
 
