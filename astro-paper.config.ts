@@ -4,7 +4,7 @@ export default defineAstroPaperConfig({
   site: {
     url: "https://astro-paper.pages.dev/",
     title: "Cloverstia",
-    description: "A minimal, responsive and SEO-friendly Astro blog theme.",
+    description: "A Mysterious Field.",
     author: "Clover",
     profile: "https://satna.ing",
     ogImage: "default-og.jpg",
