@@ -20,7 +20,7 @@ const config: ResolvedAstroPaperConfig = {
 
     googleVerification:
       userConfig.site.googleVerification || PUBLIC_GOOGLE_SITE_VERIFICATION,
-    icpRecord: "",
+    icpRecord: "浙ICP备2026068176号",
     policeRecord: "",
     policeRecordUrl: "",
   },  
