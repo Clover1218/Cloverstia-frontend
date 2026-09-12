@@ -21,8 +21,8 @@ const config: ResolvedAstroPaperConfig = {
     googleVerification:
       userConfig.site.googleVerification || PUBLIC_GOOGLE_SITE_VERIFICATION,
     icpRecord: "浙ICP备2026068176号",
-    policeRecord: "",
-    policeRecordUrl: "",
+    policeRecord: "浙公网安备33030302260904号",
+    policeRecordUrl: "https://beian.mps.gov.cn/#/query/webSearch",
   },  
   posts: {
     perPage: userConfig.posts?.perPage ?? 4,

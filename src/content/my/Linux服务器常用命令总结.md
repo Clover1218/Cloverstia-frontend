@@ -1,17 +1,17 @@
 ---
 author: Clover
 pubDatetime: 2026-09-02T15:00:00+08:00
-modDatetime: 2026-09-02T15:00:00+08:00
+modDatetime: 2026-09-11T00:18:12+08:00
 title: Linux服务器常用命令总结
-slug: the-usual-command-in-Linux 
+slug: the-usual-command-in-Linux
 featured: true
 draft: false
 tags:
   - Linux
-description: The usual command in Linux 
+description: The usual command in Linux
 ---
 
-在这篇文章中，作者总结自己日常中最常用的 Linux 命令，涵盖服务管理、github、文件操作、docker、杂项等各个方面，作为一份随身速查手册。
+在这篇文章中，作者总结自己日常中最常用的 Linux 命令，涵盖服务管理、github、文件操作、docker等等各个方面，作为一份随身速查手册。
 
 ## 服务(service)
 
@@ -246,19 +246,6 @@ git push --force-with-lease
 
 ---
 
-### mv – 移动或重命名文件/目录
-
-- `-i`：覆盖前询问，例如 `mv -i data.log logs/`
-- `-u`：仅在源文件比目标更新或目标不存在时才移动，例如 `mv -u cache/* /tmp/`
-- `-n`：不覆盖已存在的文件，例如 `mv -n old.conf new.conf`
-- `-v`：显示移动过程，例如 `mv -v *.txt archive/`
-- `-f`：强制覆盖，不询问
-- `-b`：若覆盖目标，先备份目标文件（生成 `~` 后缀）
-
-> 移动目录时：如果目标目录已存在，源目录会被移动到目标目录内部；如果目标不存在，则相当于重命名。
-
----
-
 ### ls – 列出目录内容
 
 - `-l`：长格式显示（权限、链接数、所有者、大小、时间）
@@ -273,6 +260,19 @@ git push --force-with-lease
 - `-1`：每行只输出一个文件（适用于脚本）
 
 > 组合使用：`ls -lah` 是最常用的组合，显示所有文件、人性化大小、详细属性。
+
+---
+
+### mv – 移动或重命名文件/目录
+
+- `-i`：覆盖前询问，例如 `mv -i data.log logs/`
+- `-u`：仅在源文件比目标更新或目标不存在时才移动，例如 `mv -u cache/* /tmp/`
+- `-n`：不覆盖已存在的文件，例如 `mv -n old.conf new.conf`
+- `-v`：显示移动过程，例如 `mv -v *.txt archive/`
+- `-f`：强制覆盖，不询问
+- `-b`：若覆盖目标，先备份目标文件（生成 `~` 后缀）
+
+> 移动目录时：如果目标目录已存在，源目录会被移动到目标目录内部；如果目标不存在，则相当于重命名。
 
 ---
 
