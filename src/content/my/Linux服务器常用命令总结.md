@@ -1,7 +1,7 @@
 ---
 author: Clover
 pubDatetime: 2026-09-02T15:00:00+08:00
-modDatetime: 2026-09-11T00:18:12+08:00
+modDatetime: 2026-09-13T14:01:36+08:00
 title: Linux服务器常用命令总结
 slug: the-usual-command-in-Linux
 featured: true
