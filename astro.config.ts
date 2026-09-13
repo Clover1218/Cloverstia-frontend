@@ -18,6 +18,8 @@ import {
 } from "@shikijs/transformers";
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
+import remarkBreaks from 'remark-breaks';
+import rehypeFigure from 'rehype-figure';
 
 import vue from "@astrojs/vue";
 
@@ -39,8 +41,12 @@ export default defineConfig({
       remarkPlugins: [
         remarkToc,
         [remarkCollapse, { test: "Table of contents" }],
+        remarkBreaks,
       ],
-      rehypePlugins: [rehypeCallouts],
+      rehypePlugins: [rehypeCallouts
+        ,[rehypeFigure, { figcaption: true }]
+      ],
+      
     }),
     shikiConfig: {
       themes: { light: "min-light", dark: "night-owl" },

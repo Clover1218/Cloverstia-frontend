@@ -47,3 +47,10 @@
   --muted-foreground: #afb9ca;
   --border: #ab4b08;
 }
+
+figcaption {
+  text-align: center;
+  font-size: 0.875rem; /* 可选：让图注字体稍小一些 */
+  color: #666;          /* 可选：让图注颜色淡一些 */
+  margin-top: 0.5rem;   /* 可选：与图片的间距 */
+}
