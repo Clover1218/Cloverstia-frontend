@@ -1,13 +1,14 @@
 ---
 author: Clover
 pubDatetime: 2026-09-19T15:35:07+08:00
-modDatetime: 2026-09-22T19:18:51+08:00
-title: Notes on NJU 2026 OS M1
+modDatetime: 2026-09-22T19:21:23+08:00
+title: Notes_on_NJU_2026_OS_M1
 featured: false
 draft: true
 slug: Notes_on_NJU_2026_OS_M1
 tags:
   - OS
+description: Something to record
 ---
 # 命令解析实现
 起初拿到要求一头雾水，要从头处理繁杂的解析和错误处理吗？后来在实验文档中看到
