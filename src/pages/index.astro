@@ -1,143 +1,199 @@
 ---
-import { getCollection } from "astro:content";
-import { getRelativeLocaleUrl } from "astro:i18n";
-import IconRss from "@/assets/icons/IconRss.svg";
-import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
+/**
+ * 首屏落地页（/）
+ * - 背景：public/backgorund_winter.png（全屏 cover）
+ * - 顶部：public/header_font.png 站点字体图
+ * - 按钮：Blog → /blog/，Minecraft → https://mc.cloverstia.site
+ * - 飘雪特效：通过下方 SNOW_ENABLED 开关控制，改为 false 即可整体关闭
+ */
 import Layout from "@/layouts/Layout.astro";
-import Header from "@/components/Header.astro";
-import Footer from "@/components/Footer.astro";
-import Socials from "@/components/Socials.astro";
-import Card from "@/components/Card.astro";
-import LinkButton from "@/components/LinkButton.astro";
-import { getSortedPosts } from "@/utils/getSortedPosts";
-import { useTranslations } from "@/i18n";
-import config from "@/config";
+import { getAssetPath } from "@/utils/withBase";
 
-const { socials, posts: postsConfig } = config;
+// ===== 飘雪特效开关（后期增删改这里即可） =====
+const SNOW_ENABLED = true;
+const SNOW_COUNT = 50; // 雪花数量
 
-const locale = Astro.currentLocale ?? config.site.lang;
-const t = useTranslations(locale);
+// 确定性伪随机，保证每次构建雪花分布一致
+function rand(seed: number): number {
+  const x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
+  return x - Math.floor(x);
+}
 
-const posts = await getCollection("posts");
-const sortedPosts = getSortedPosts(posts);
-const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
-const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
-const homePath = getRelativeLocaleUrl(locale, "");
+const snowflakes = Array.from({ length: SNOW_ENABLED ? SNOW_COUNT : 0 }, (_, i) => ({
+  left: rand(i + 1) * 100, // 水平位置 %
+  size: 2 + rand(i + 2) * 5, // 直径 px
+  duration: 9 + rand(i + 3) * 14, // 下落时长 s
+  delay: -rand(i + 4) * 20, // 负延迟让雪花开场即分布全屏
+  opacity: 0.25 + rand(i + 5) * 0.6,
+  drift: (rand(i + 6) - 0.5) * 240, // 水平漂移 px
+  blur: rand(i + 7) > 0.75 ? 1.5 : 0, // 少量雪花虚化，制造景深
+}));
+
+const BG_URL = getAssetPath("backgorund_winter.png");
+const FONT_URL = getAssetPath("header_font.png");
 ---
+
 <Layout>
-  <Header />
-  <main
-    id="main-content"
-    data-layout="index"
-    data-home-path={homePath}
-    class="app-layout my-1"
-  >
-    <section id="hero" class="border-border border-b pt-8 pb-6">
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Welcome! 
-      </h1>
-      <!-- <a
-        target="_blank"
-        href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
-        class="inline-block"
-        aria-label="RSS Feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
+  <main class="landing" style={`--bg-url: url('${BG_URL}')`}>
+    <!-- 飘雪层 -->
+    {
+      snowflakes.map(f => (
+        <span
+          class="snowflake"
+          style={`--left:${f.left}%; --size:${f.size}px; --duration:${f.duration}s; --delay:${f.delay}s; --opacity:${f.opacity}; --drift:${f.drift}px; --blur:${f.blur}px;`}
+          aria-hidden="true"
         />
-        <span class="sr-only">RSS Feed</span>
-      </a> -->
-
-      <p>
-        本站由 Clover 基于 AstroPaper 主题定制改造。
-AstroPaper 是一个极简、响应式、注重可访问性和 SEO 的 Astro 博客主题。Clover 在其基础上融入了自己的设计偏好与功能扩展，让这个博客更贴合个人风格与使用习惯。感谢开源社区和 AstroPaper 作者提供的优秀基础。
-      </p>
-      <!-- <p class="mt-2">
-        Read the blog posts or check{" "}
-        <LinkButton
-          class="hover:text-accent underline decoration-dashed underline-offset-4"
-          href="https://github.com/Clover1218/Cloverstia-frontend/astro-paper#readme"
-        >
-          README
-        </LinkButton>{" "}
-        for more info.
-      </p> -->
-      {
-        socials.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">
-              {t.home.socialLinks}:
-            </div>
-            <Socials />
-          </div>
-        )
-      }
-    </section>
-
-    {
-      featuredPosts.length > 0 && (
-        <section
-          id="featured"
-          class:list={[
-            "pt-12 pb-6",
-            { "border-border border-b": recentPosts.length > 0 },
-          ]}
-        >
-          <h2 class="text-2xl font-semibold tracking-wide">
-            {t.home.featured}
-          </h2>
-          <ul>
-            {featuredPosts.map(data => (
-              <Card variant="h3" {...data} />
-            ))}
-          </ul>
-        </section>
-      )
+      ))
     }
 
-    {
-      recentPosts.length > 0 && (
-        <section id="recent-posts" class="pt-12 pb-6">
-          <h2 class="text-2xl font-semibold tracking-wide">
-            {t.home.recentPosts}
-          </h2>
-          <ul>
-            {recentPosts.slice(0, postsConfig.perIndex).map(data => (
-              <Card variant="h3" {...data} />
-            ))}
-          </ul>
-        </section>
-      )
-    }
-
-    <div class="my-8 text-center">
-      <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
-        {t.home.allPosts}
-        <IconArrowRight class="inline-block rtl:-rotate-180" />
-      </LinkButton>
+    <div class="landing-content">
+      <img class="site-font fade-in" src={FONT_URL} alt="Cloverstia" />
+      <nav class="landing-nav fade-in fade-in-delay" aria-label="站点导航">
+        <a class="glass-btn" href="/blog/">Blog</a>
+        <a
+          class="glass-btn"
+          href="https://mc.cloverstia.site"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Minecraft
+        </a>
+      </nav>
     </div>
   </main>
-  <Footer />
 </Layout>
 
-
 <style>
-.hero-content {
-  position: relative;
-  z-index: 100;
-  /* ... 样式 ... */
-}
-</style>
-<script>
-  document.addEventListener("astro:page-load", () => {
-    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
-      ?.dataset;
-    const baseRoot = import.meta.env.BASE_URL.replace(/\/?$/, "/");
-    if (indexLayout?.layout) {
-      sessionStorage.setItem("backUrl", indexLayout.homePath ?? baseRoot);
+  .landing {
+    position: relative;
+    min-height: 100dvh;
+    overflow: hidden;
+    background-image:
+      linear-gradient(to bottom, rgba(10, 20, 35, 0.08), rgba(10, 20, 35, 0.22)),
+      var(--bg-url);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .landing-content {
+    position: relative;
+    z-index: 10;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: clamp(2.5rem, 8vh, 5rem);
+    padding: clamp(1.5rem, 6vh, 4rem) 1.5rem;
+  }
+
+  .site-font {
+    width: min(72vw, 30rem);
+    height: auto;
+    filter: drop-shadow(0 2px 12px rgba(20, 35, 60, 0.35));
+  }
+
+  .landing-nav {
+    display: flex;
+    align-items: center;
+    gap: clamp(1.25rem, 4vw, 2.5rem);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ===== 毛玻璃雪色按钮 ===== */
+  .glass-btn {
+    display: inline-block;
+    padding: 0.85rem 2.75rem;
+    border-radius: 9999px;
+    border: 1px solid rgba(255, 255, 255, 0.55);
+    background: rgba(255, 255, 255, 0.16);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-decoration: none;
+    box-shadow:
+      0 4px 24px rgba(20, 35, 60, 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    transition:
+      background 0.25s ease,
+      transform 0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .glass-btn:hover,
+  .glass-btn:focus-visible {
+    background: rgba(255, 255, 255, 0.32);
+    transform: translateY(-3px);
+    box-shadow:
+      0 8px 32px rgba(20, 35, 60, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  /* ===== 飘雪 ===== */
+  .snowflake {
+    position: fixed;
+    top: 0;
+    left: var(--left);
+    width: var(--size);
+    height: var(--size);
+    background: #fff;
+    border-radius: 50%;
+    opacity: var(--opacity);
+    filter: blur(var(--blur));
+    pointer-events: none;
+    z-index: 5;
+    animation: snow-fall var(--duration) linear var(--delay) infinite;
+  }
+
+  @keyframes snow-fall {
+    0% {
+      transform: translate3d(0, -8vh, 0);
     }
-  });
-</script>
+    100% {
+      transform: translate3d(var(--drift), 108vh, 0);
+    }
+  }
+
+  /* ===== 入场淡入 ===== */
+  .fade-in {
+    animation: fade-up 1.1s ease-out both;
+  }
+  .fade-in-delay {
+    animation-delay: 0.35s;
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* 尊重系统"减少动态效果"设置 */
+  @media (prefers-reduced-motion: reduce) {
+    .snowflake {
+      animation: none;
+      display: none;
+    }
+    .fade-in {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .glass-btn {
+      padding: 0.75rem 2.25rem;
+      font-size: 1.05rem;
+    }
+  }
+</style>
