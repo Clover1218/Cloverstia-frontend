@@ -1,10 +1,11 @@
 ---
 author: Clover
 pubDatetime: 2026-09-19T15:35:07+08:00
-modDatetime: 2026-09-20T22:10:20+08:00
+modDatetime: 2026-09-22T19:18:51+08:00
 title: Notes on NJU 2026 OS M1
 featured: false
 draft: true
+slug: Notes_on_NJU_2026_OS_M1
 tags:
   - OS
 ---
