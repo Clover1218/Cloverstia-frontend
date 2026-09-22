@@ -8,6 +8,7 @@
  */
 import Layout from "@/layouts/Layout.astro";
 import { getAssetPath } from "@/utils/withBase";
+import config from "@/config";
 
 // ===== 飘雪特效开关（后期增删改这里即可） =====
 const SNOW_ENABLED = true;
@@ -31,6 +32,12 @@ const snowflakes = Array.from({ length: SNOW_ENABLED ? SNOW_COUNT : 0 }, (_, i) 
 
 const BG_URL = getAssetPath("backgorund_winter.png");
 const FONT_URL = getAssetPath("header_font.png");
+
+// ===== 备案信息（直接引用 src/config.ts 中的 site 配置）=====
+const ICP_NO = config.site.icpRecord;
+const ICP_URL = "https://beian.miit.gov.cn"; // ICP 官方备案查询站（config 未单独提供）
+const PS_NO = config.site.policeRecord;
+const PS_URL = config.site.policeRecordUrl;
 ---
 
 <Layout>
@@ -60,6 +67,40 @@ const FONT_URL = getAssetPath("header_font.png");
         </a>
       </nav>
     </div>
+
+    <!-- 底部居中的备案信息（方案 A） -->
+    <footer class="beian fade-in fade-in-delay">
+      <a class="beian-link" href={ICP_URL} target="_blank" rel="noopener noreferrer">
+        {ICP_NO}
+      </a>
+      <span class="beian-sep" aria-hidden="true">·</span>
+      <a class="beian-link beian-ps" href={PS_URL} target="_blank" rel="noopener noreferrer">
+        <svg
+          class="ps-icon"
+          viewBox="0 0 24 24"
+          width="13"
+          height="13"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linejoin="round"
+          ></path>
+          <path
+            d="M9 11.5 11 13.5 15 9"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+        {PS_NO}
+      </a>
+    </footer>
   </main>
 </Layout>
 
@@ -194,6 +235,76 @@ const FONT_URL = getAssetPath("header_font.png");
     .glass-btn {
       padding: 0.75rem 2.25rem;
       font-size: 1.05rem;
+    }
+  }
+
+  /* ===== 底部居中备案信息（方案 A）===== */
+  .beian {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: clamp(0.75rem, 3vh, 1.5rem);
+    /* 用 left/right + margin auto 居中，避免 transform 与 fade-in 动画互相覆盖 */
+    margin-inline: auto;
+    width: fit-content;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: calc(100vw - 2rem);
+    padding: 0.4rem 1rem;
+    border-radius: 9999px;
+    background: rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(255, 255, 255, 0.85);
+    text-shadow: 0 1px 4px rgba(10, 20, 35, 0.45);
+  }
+
+  .beian-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.2s ease;
+  }
+
+  .beian-link:hover,
+  .beian-link:focus-visible {
+    color: #fff;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .beian-sep {
+    opacity: 0.6;
+  }
+
+  .ps-icon {
+    flex-shrink: 0;
+  }
+
+  /* 尊重系统"减少动态效果"设置 */
+  @media (prefers-reduced-motion: reduce) {
+    .beian.fade-in {
+      animation: none;
+    }
+  }
+
+  @media (max-width: 360px) {
+    .beian {
+      flex-direction: column;
+      gap: 0.25rem;
+      border-radius: 12px;
+    }
+    .beian-sep {
+      display: none;
     }
   }
 </style>
