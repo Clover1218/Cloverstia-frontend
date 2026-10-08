@@ -1,7 +1,7 @@
 ---
 author: Clover
 pubDatetime: 2026-10-07T23:42:25+08:00
-modDatetime: 2026-10-08T22:29:16+08:00
+modDatetime: 2026-10-08T22:52:29+08:00
 title: Minecraft服务器游玩常见问题(仅本人看来)解决方法
 featured: true
 draft: false
@@ -67,4 +67,4 @@ description: As the title says
 ![原始文件](https://r2.clovercloud.ccwu.cc/2026/10/dd631c1e781f1de4c5b576b3be5f266d.png)
 将`MojangAPI`与`LittleSkin`互换，得：
 ![修改后的文件](https://r2.clovercloud.ccwu.cc/2026/10/a75c7d4c3df606164715025264a00615.png)
-4. 修改后记得按`Ctrl+S`保存后再退出，建议再删掉第二步中指出的`caches`文件夹以免皮肤还是沿用缓存。
+4. 修改后记得按`Ctrl+S`保存后再退出，建议再删掉第二步中指出的`caches`文件夹以免皮肤还是沿用缓存，然后重启客户端即可。
