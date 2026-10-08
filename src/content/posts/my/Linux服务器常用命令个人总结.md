@@ -1,7 +1,7 @@
 ---
 author: Clover
 pubDatetime: 2026-09-02T15:00:00+08:00
-modDatetime: 2026-09-22T19:04:25+08:00
+modDatetime: 2026-10-07T23:42:18+08:00
 title: Linux服务器常用命令总结
 slug: the-usual-command-in-Linux
 featured: true
@@ -13,9 +13,9 @@ description: The usual command in Linux
 
 在这篇文章中，作者总结自己日常中最常用的 Linux 命令，涵盖服务管理、github、文件操作、docker等等各个方面，作为一份随身速查手册。
 
-## 服务(service)
+# 服务(service)
 
-### 服务的维护
+## 服务的维护
 ```shell
 # 开启服务
 sudo systemctl start <服务名> 	
@@ -30,7 +30,7 @@ sudo journalctl -u <服务名> -f
 # 查看服务日志（最后 N 行）	
 sudo journalctl -u <服务名> -n 50
 ```
-### 服务从创建到启动
+## 服务从创建到启动
 
 1. 创建一个服务
 ```shell
@@ -62,7 +62,7 @@ sudo systemctl enable myapp
 sudo systemctl start myapp
 ```
 
-### 服务配置详解
+## 服务配置详解
 
 `[Unit]` 区块主要描述服务本身，并定义它与其他服务的关系。
 
@@ -116,9 +116,9 @@ sudo systemctl start myapp
 | Alias | 为服务设置别名。 | 设置后，可以用别名来操作服务，例如 systemctl start myapp。 |
 | Also | 在启用或禁用当前服务时，同时启用或禁用列表中的其他单元。 | 用于管理一组相关联的服务。 |
 
-## Github相关
+# Github相关
 
-### 克隆仓库
+## 克隆仓库
 ```shell
 # 克隆远程仓库到本地（默认使用 HTTPS）
 git clone https://github.com/username/repo.git
@@ -127,7 +127,7 @@ git clone git@github.com:username/repo.git
 # 克隆到指定目录
 git clone https://github.com/username/repo.git myfolder
 ```
-### 远程仓库管理
+## 远程仓库管理
 ```shell
 # 查看当前配置的远程仓库
 git remote -v
@@ -138,7 +138,7 @@ git remote set-url origin https://github.com/username/new-repo.git
 # 删除远程仓库
 git remote remove origin
 ```
-### 拉取仓库
+## 拉取仓库
 ```shell
 # 拉取远程当前分支的最新代码并合并（最常用）
 git pull
@@ -149,7 +149,7 @@ git fetch origin
 # 拉取并变基（保持提交历史线性，常用）
 git pull --rebase
 ```
-### 分支管理
+## 分支管理
 ```shell
 # 查看所有本地分支（当前分支前有 * 标记）
 git branch
@@ -173,7 +173,7 @@ git branch -D <分支名>   # 强制删除（未合并也删）
 # 删除远程分支
 git push origin --delete <分支名>
 ```
-### 提交更改
+## 提交更改
 ```shell
 # 查看当前文件状态
 git status
@@ -186,7 +186,7 @@ git commit -m "提交信息"
 # 修改最近一次提交信息（或补充遗漏文件）
 git commit --amend -m "新的信息"
 ```
-### 推送更改
+## 推送更改
 ```shell
 # 推送当前分支到远程同名分支（首次推送需设置上游）
 git push
@@ -197,7 +197,7 @@ git push --force
 # 更安全的强制推送（只覆盖远程上不存在的提交）
 git push --force-with-lease
 ```
-### 常用组合命令
+## 常用组合命令
 ```shell
 # 拉取最新代码并保持历史干净	
 git pull --rebase origin main
@@ -217,9 +217,9 @@ git commit --amend -m "新信息"
 git push --force-with-lease
 ```
 
-## 文件操作
+# 文件操作
 
-### chmod – 修改文件或目录权限
+## chmod – 修改文件或目录权限
 
 - `+x`：添加执行权限，例如 `chmod +x start.sh`
 - `u=rwx,g=rx,o=r`：精细控制不同角色的权限
@@ -235,7 +235,7 @@ git push --force-with-lease
 
 ---
 
-### rm – 删除文件或目录
+## rm – 删除文件或目录
 
 - `-i`：删除前逐一确认，安全操作，例如 `rm -i file.txt`
 - `-f`：强制删除，忽略不存在的文件，不提示，例如 `rm -f /tmp/lock.pid`
@@ -246,7 +246,7 @@ git push --force-with-lease
 
 ---
 
-### ls – 列出目录内容
+## ls – 列出目录内容
 
 - `-l`：长格式显示（权限、链接数、所有者、大小、时间）
 - `-a`：显示所有文件，包括以 `.` 开头的隐藏文件
@@ -263,7 +263,7 @@ git push --force-with-lease
 
 ---
 
-### mv – 移动或重命名文件/目录
+## mv – 移动或重命名文件/目录
 
 - `-i`：覆盖前询问，例如 `mv -i data.log logs/`
 - `-u`：仅在源文件比目标更新或目标不存在时才移动，例如 `mv -u cache/* /tmp/`
@@ -276,7 +276,7 @@ git push --force-with-lease
 
 ---
 
-### ln – 创建链接（硬链接与软链接）
+## ln – 创建链接（硬链接与软链接）
 
 默认 `ln` 创建硬链接，使用 `-s` 创建软链接（符号链接）。
 
@@ -312,7 +312,7 @@ git push --force-with-lease
 
 > 实用场景：软链接常用于管理多个版本的软件（如 `python` 指向 `python3.10`），硬链接则用于节省空间的备份（不复制数据，只是增加引用计数）。
 
-## Docker操作
+# Docker操作
 
 0. 前置准备：确认 docker-compose 工具，如果没装，可手动安装
 ```shell
@@ -431,9 +431,9 @@ docker exec -it repair-backend cat /app/config/config.yaml
 
 
 
-## 杂项与常用命令
+# 杂项与常用命令
 
-### 基础环境与快捷键
+## 基础环境与快捷键
 
 - `PATH` 环境变量示例：`PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin:~/bin`，系统按此顺序查找可执行文件
 - `Shift + PgUp`：向上翻页（终端中查看长输出时有用）
@@ -441,7 +441,7 @@ docker exec -it repair-backend cat /app/config/config.yaml
 
 ---
 
-### 变量（Shell 变量）
+## 变量（Shell 变量）
 
 - `name=value`：声明一个变量（注意 `=` 两边不能有空格），例如 `name=hello`
 - `$name`：输出变量的值，例如 `echo $name`
@@ -457,7 +457,7 @@ docker exec -it repair-backend cat /app/config/config.yaml
 
 ---
 
-### 别名（Alias）
+## 别名（Alias）
 
 - `alias 别名='命令'`：为长命令设置简写，例如 `alias ll='ls -alF'`
 - `unalias 别名`：取消已设置的别名，例如 `unalias ll`
@@ -465,7 +465,7 @@ docker exec -it repair-backend cat /app/config/config.yaml
 
 ---
 
-### 重定向
+## 重定向
 
 | 类型 | 代码 | 符号 | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -481,7 +481,7 @@ docker exec -it repair-backend cat /app/config/config.yaml
 
 ---
 
-### 多命令连接符
+## 多命令连接符
 
 - `;`：按顺序依次执行，无论前一条是否成功，例如 `cd /tmp; ls -la`
 - `A && B`：若 A 执行成功，才执行 B；若 A 失败，B 不执行（常用于确保依赖条件满足）
@@ -494,9 +494,9 @@ docker exec -it repair-backend cat /app/config/config.yaml
 
 ---
 
-### grep 与正则表达式
+## grep 与正则表达式
 
-#### 基本用法
+### 基本用法
 
 - `grep [-选项] "表达式" 文件路径`：在文件中搜索匹配的行
 - `-n`：显示匹配行所在的行号
@@ -506,7 +506,7 @@ docker exec -it repair-backend cat /app/config/config.yaml
 - `-E`：使用扩展正则表达式（等价于 `egrep`）
 - `-c`：只统计匹配的行数
 
-#### 基础正则表达式（BRE）
+### 基础正则表达式（BRE）
 
 - `[0-9]`、`[a-z]`、`[A-Z]`：指定范围内的单个字符
 - `[^0-9]`：反选，匹配除了数字以外的任意字符
@@ -519,7 +519,7 @@ docker exec -it repair-backend cat /app/config/config.yaml
 - `\{n\}`：连续恰好 n 个前一个字符
 - `\{n,\}`：连续 n 个以上前一个字符
 
-#### 扩展正则表达式（ERE）- 需加 `-E` 或使用 `egrep`
+### 扩展正则表达式（ERE）- 需加 `-E` 或使用 `egrep`
 
 - `+`：代表 1 个或 1 个以上的前一个字符，例如 `a+` 匹配 a、aa、aaa...
 - `?`：代表 0 个或 1 个的前一个字符，例如 `a?` 匹配 空 或 a
@@ -530,13 +530,13 @@ docker exec -it repair-backend cat /app/config/config.yaml
 
 ---
 
-### 管道命令（`|`）
+## 管道命令（`|`）
 
 管道的作用：**将前一个命令的 stdout（标准输出）作为后一个命令的 stdin（标准输入）**，实现命令的链式组合。
 
 基本语法：`命令A | 命令B | 命令C ...`
 
-#### 常用管道组合示例
+### 常用管道组合示例
 
 - `grep error /var/log/syslog | less`：在日志中搜索 error，然后用分页方式查看
 - `ps aux | grep python`：查看所有进程，筛选出包含 python 的进程（常用于找特定服务）
@@ -545,7 +545,7 @@ docker exec -it repair-backend cat /app/config/config.yaml
 - `ls -la | sort -k5 -rn`：列出文件并按第 5 列（大小）倒序排序
 - `docker ps -a | grep Exited | awk '{print $1}' | xargs docker rm`：列出所有已退出的容器，提取容器 ID，然后删除它们
 
-#### 进阶组合：xargs
+### 进阶组合：xargs
 
 当管道传递的不是文本流而是“命令行参数列表”时，`xargs` 可以将标准输入转换成命令的参数。
 
@@ -556,7 +556,7 @@ docker exec -it repair-backend cat /app/config/config.yaml
 
 ---
 
-### 常用查询命令
+## 常用查询命令
 
 - `which <命令>`：查找命令的绝对路径，例如 `which python3`
 - `whereis <命令>`：查找命令、源代码和手册页的位置，例如 `whereis nginx`
@@ -566,7 +566,7 @@ docker exec -it repair-backend cat /app/config/config.yaml
 
 ---
 
-### 管道与重定向组合使用技巧
+## 管道与重定向组合使用技巧
 
 - `command 2>&1 | grep "error"`：将标准错误合并到标准输出，一起传给 grep
 - `command 2>/dev/null | tee output.log`：丢弃错误，同时将输出打印到屏幕并写入文件

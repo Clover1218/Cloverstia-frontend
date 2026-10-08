@@ -22,6 +22,7 @@ export default {
     editPage: "Edit page",
     previousPost: "Previous Post",
     nextPost: "Next Post",
+    tableOfContents: "目录",
   },
   pagination: {
     prev: "Prev",

@@ -20,6 +20,7 @@ export interface UIStrings {
     editPage: string;
     previousPost: string;
     nextPost: string;
+    tableOfContents: string;
   };
   pagination: {
     prev: string;

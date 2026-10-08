@@ -1,0 +1,135 @@
+---
+import IconUnderline from "@/assets/icons/IconUnderline.svg";
+import { useTranslations } from "@/i18n";
+
+export interface TocHeading {
+  depth: number;
+  slug: string;
+  text: string;
+}
+
+type Props = {
+  headings: TocHeading[];
+};
+
+const { headings } = Astro.props;
+const t = useTranslations(Astro.currentLocale);
+
+//正文里 h1 可能是误用（h1 已由 frontmatter title 承担），
+//但为了不漏掉把 h1 当章节用的文章，这里保留 h1~h3。
+const MAX_DEPTH = 3;
+
+const filtered = headings.filter(({ depth }) => depth <= MAX_DEPTH);
+
+// 归一化缩进：以实际出现的最浅层级为基准，
+// 否则全篇用 ## 起头的文章会整体多缩进一级
+const minDepth = filtered.length
+  ? Math.min(...filtered.map(({ depth }) => depth))
+  : 1;
+
+const items = filtered.map(heading => ({
+  ...heading,
+  level: heading.depth - minDepth,
+}));
+
+// 没有章节就不渲染入口
+const hasToc = items.length > 0;
+---
+
+{
+  hasToc && (
+    <details class="toc group/toc not-prose my-6">
+      <summary
+        class:list={[
+          "border-border hover:border-accent/60 flex cursor-pointer list-none items-center",
+          "gap-3 border-y border-dashed py-2.5 transition-colors select-none",
+          "[&::-webkit-details-marker]:hidden",
+        ]}
+      >
+        <IconUnderline class="text-accent size-5 shrink-0" />
+        <span class="text-foreground text-sm font-medium">
+          {t.post.tableOfContents}
+        </span>
+        <svg
+          class="text-muted-foreground ms-auto size-4 shrink-0 rotate-180 transition-transform duration-300 group-open/toc:rotate-0"
+          viewBox="0 0 16 16"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M4 6L8 10L12 6"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        </svg>
+      </summary>
+
+      <nav
+        class="border-border animate-toc-in border-t border-dashed pt-4"
+        aria-label={t.post.tableOfContents}
+      >
+        <ol class="columns-1 gap-x-8 lg:columns-2">
+          {items.map(({ slug, text, level }) => (
+            <li class="break-inside-avoid">
+              <a
+                href={`#${slug}`}
+                class:list={[
+                  "hover:bg-muted hover:text-accent block border-s py-1.5",
+                  "pe-2 transition-colors",
+                  // 竖线分级：4px / 3px / 3px，颜色依次变浅
+                  level === 0 && "border-s-foreground border-s-[4px]",
+                  level === 1 && "border-s-muted-foreground border-s-[3px]",
+                  level === 2 && "border-s-muted-foreground/50 border-s-[3px]",
+                  // 缩进
+                  level === 0 ? "ps-5" : level === 1 ? "ps-9" : "ps-12",
+                  // 文字：仅一级标题加粗
+                  level === 0
+                    ? "text-foreground text-sm font-medium"
+                    : "text-muted-foreground text-sm",
+                ]}
+              >
+                {text}
+              </a>
+            </li>
+          ))}
+        </ol>
+      </nav>
+    </details>
+  )
+}
+
+<style>
+  @keyframes toc-in {
+    from {
+      opacity: 0;
+      transform: translateY(-0.25rem);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-toc-in {
+    animation: toc-in 0.22s ease-out;
+  }
+
+  /* 两栏之间的竖分隔线 */
+  .toc ol {
+    column-rule: 1px solid var(--color-border);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-toc-in {
+      animation: none;
+    }
+  }
+
+  .toc a:hover {
+    text-decoration: none;
+    /* 悬停时左侧竖线变accent色（Tailwind 无 hover:border-s-* 变体） */
+    border-inline-start-color: var(--color-accent);
+  }
+</style>
