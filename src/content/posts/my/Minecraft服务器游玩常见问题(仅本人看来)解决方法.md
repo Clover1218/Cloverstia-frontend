@@ -3,8 +3,8 @@ author: Clover
 pubDatetime: 2026-10-07T23:42:25+08:00
 modDatetime: 2026-10-08T22:29:16+08:00
 title: Minecraft服务器游玩常见问题(仅本人看来)解决方法
-featured: false
-draft: true
+featured: true
+draft: false
 slug: solutions-to-usual-problems-of-Minecraft-Server
 tags:
   - Minecraft
