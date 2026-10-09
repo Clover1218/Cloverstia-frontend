@@ -19,7 +19,7 @@ import {
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
 import remarkBreaks from 'remark-breaks';
-import rehypeFigure from 'rehype-figure';
+import rehypeImageFigure from '@tuyuritio/rehype-image-figure';
 
 import vue from "@astrojs/vue";
 
@@ -43,9 +43,9 @@ export default defineConfig({
         [remarkCollapse, { test: "Table of contents" }],
         remarkBreaks,
       ],
-      rehypePlugins: [rehypeCallouts
-        ,[rehypeFigure, { figcaption: true }]
-      ],
+    rehypePlugins: [
+      rehypeImageFigure
+    ],
       
     }),
     shikiConfig: {
